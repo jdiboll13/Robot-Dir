@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Directory</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+          <h1>User Directory</h1>
+          <ul class="users">
+              {{#id}}
+                <li>
+                  <img src={{imageurl}} alt="Oops">
+                  <h2><a href="/users/{{username}}">{{username}}</a></h2>
+                  {{#job}}<p>{{job}}, {{company}}</p>{{/job}}
+                  {{^job}}<p class="nojob">Available for Hire</p>{{/job}}
+                </li>
+              {{/id}}
+          </ul>
+    </div>
+  </body>
+</html>

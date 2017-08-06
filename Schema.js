@@ -1,0 +1,45 @@
+CREATE TABLE robotDB (
+"id" SERIAL PRIMARY KEY,
+"username" VARCHAR(100) NOT NULL,
+“imageurl” VARCHAR(100) NULL,
+“email” VARCHAR(100) NULL,
+“university” VARCHAR(100) NULL,
+“address” VARCHAR(100) NULL,
+“city” VARCHAR(100) NULL,
+“state” VARCHAR(100) NULL,
+“postal_code” VARCHAR(100) NULL,
+“job” VARCHAR(100) NULL,
+“company” VARCHAR(100) NULL,
+“year_built” VARCHAR(100) NULL,
+“next_service_date” DATE,
+“is_active” BOOLEAN);
+
+INSERT INTO robotDB (
+"username",
+“imageurl” ,
+“email”,
+“university”,
+“address”,
+“city”,
+“state”,
+“postal_code”,
+“job”,
+“company”,
+“year_built”,
+“next_service_date”,
+“is_active”)
+VALUES (
+'username',
+'imageurl',
+'email',
+'university',
+'address',
+'city',
+'state',
+'postal_code',
+'job',
+'company',
+'year_built',
+'next_service_date',
+'is_active'
+);
