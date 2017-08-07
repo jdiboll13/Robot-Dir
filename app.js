@@ -7,8 +7,8 @@ const expressSession = require('express-session')
 const app = express()
 const pgPromise = require('pg-promise')()
 const database = pgPromise({ database: 'RobotDatabase' })
-const query = 'SELECT * FROM "robotdb"'
-
+const query = 'SELECT * FROM robotdb'
+const queryuser = 'SELECT * FROM robotdb WHERE id = ${id}'
 // Schema:
 // CREATE TABLE robotDB (
 // "id" SERIAL PRIMARY KEY,
@@ -34,38 +34,44 @@ app.use(
 )
 app.use(express.static('public'))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mustache')
-//Can use mst instead of mustache. This is apparently very common.
-// app.listen(3000, () => {
-//   console.log("Let's do this!")
-// })
+
+app.listen(3000, () => {
+  console.log("Let's do this!")
+})
+app.get('/', (req, res) => {
+  database.any(query).then(rows => {
+    // rows.forEach()
+    console.log(rows)
+    res.render('index', rows)
+  })
+})
 app.get('/users/:id', (req, res) => {
   // Pull out the ID from the url
-  const id = parseInt(req.params.id)
+  const id = req.params.id
 
   // Go find the todo with this ID in the database
   //database.one('SELECT * FROM "todos" WHERE id = $1', idFromTheParamsWeGotFromTheURL)
   database
-    .one('SELECT * FROM "todos" WHERE id = $(id)', { id: id })
+    .one(queryuser, { id: id })
     // Bring back its details!
-    .then(rows => {
+    .then(data => {
+      console.log(data)
       // Render a template
-      res.render('users', rows)
+      res.render('users', data)
     })
 })
-app.get('/', (req, res) => {
-  database.any(query).then(rows => {})
-  res.render('index', rows)
-})
-app.get('/users/:id', (req, res) => {
-  const userData = {
-    id: req.params.id
-  }
-  function findUser(user) {
-    return user.id === userData.id
-  }
-  const oneUser = data.users.find(findUser)
-  res.render('users', oneUser)
-})
+
+// app.get('/users/:id', (req, res) => {
+//   const userData = {
+//     id: req.params.id
+//   }
+//   function findUser(user) {
+//     return user.id === userData.id
+//   }
+//   const oneUser = data.users.find(findUser)
+//   res.render('users', oneUser)
+// })

@@ -11,15 +11,16 @@
     <div class="user">
       <div class="primary">
         <figure>
-          <img src="{{avatar}}">
+          <img src="{{imageurl}}">
         </figure>
         <div class="contact">
           <h1>{{name}}</h1>
           <p>
-          {{#address.city}}
-          {{address.city}},
-          {{/address.city}}
-          {{address.country}} |
+          {{#address}}
+          {{address}}
+          {{city}}, {{state}} {{postal_code}}
+          {{/address}}
+          |
           {{#job}}
           {{job}}, {{company}}
           {{/job}}
@@ -27,7 +28,7 @@
           <span class="nojob">Available for Hire</span>
           {{/job}}
           </p>
-          <p>{{email}} | {{phone}}</p>
+          <p>{{email}}</p>
         </div>
       </div>
       <div class="details">
@@ -36,10 +37,10 @@
           <dt>Education</dt>
           <dd>{{university}}</dd>
           {{/university}}
-          <dt>Skills</dt>
-          {{#skills}}
-          <dd>{{.}}</dd>
-          {{/skills}}
+          <dt>Year Built</dt>
+          <dd>{{year_built}}</dd>
+          <dt>Next Service Date</dt>
+          <dd>{{next_service_date}}</dd>
         </dl>
       </div>
     </div>
