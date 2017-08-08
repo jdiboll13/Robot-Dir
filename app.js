@@ -9,22 +9,7 @@ const pgPromise = require('pg-promise')()
 const database = pgPromise({ database: 'RobotDatabase' })
 const query = 'SELECT * FROM robotdb'
 const queryuser = 'SELECT * FROM robotdb WHERE id = ${id}'
-// Schema:
-// CREATE TABLE robotDB (
-// "id" SERIAL PRIMARY KEY,
-// "username" VARCHAR(100) NOT NULL,
-// “imageurl” VARCHAR(100) NULL,
-// “email” VARCHAR(100) NULL,
-// “university” VARCHAR(100) NULL,
-// “address” VARCHAR(100) NULL,
-// “city” VARCHAR(100) NULL,
-// “state” VARCHAR(100) NULL,
-// “postal_code” VARCHAR(100) NULL,
-// “job” VARCHAR(100) NULL,
-// “company” VARCHAR(100) NULL,
-// “year_built” VARCHAR(100) NULL,
-// “next_service_date” DATE,
-// “is_active” BOOLEAN);
+
 app.use(
   expressSession({
     secret: 'keyboard cat',
